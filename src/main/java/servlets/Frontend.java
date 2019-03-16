@@ -17,11 +17,12 @@ public class Frontend extends HttpServlet {
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response)
             throws ServletException, IOException {
-        Map<String, Object> pageVariables = createPageVariablesMap(request);
 
-        response.getWriter().println(PageGenerator.instance().getPage("page.html", pageVariables));
-        response.setContentType("text/html;charset=utf-8");
-        response.setStatus(HttpServletResponse.SC_OK);
+      Map<String, Object> pageVariables = createPageVariablesMap(request);
+
+      response.getWriter().println(pageVariables.get("key").toString());
+      response.setContentType("text/html;charset=utf-8");
+      response.setStatus(HttpServletResponse.SC_OK);
     }
 
     public void doPost(HttpServletRequest request,
@@ -33,7 +34,7 @@ public class Frontend extends HttpServlet {
     private static Map<String, Object> createPageVariablesMap(HttpServletRequest request) {
         Map<String, Object> pageVariables = new HashMap<>();
         pageVariables.put("method", request.getMethod());
-        pageVariables.put("params", request.getParameterMap().toString());
+        pageVariables.put("key", request.getParameter("key"));
         return pageVariables;
     }
 }
