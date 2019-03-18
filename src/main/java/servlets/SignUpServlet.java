@@ -1,6 +1,7 @@
 package servlets;
 
 import accounts.AccountService;
+import accounts.UserProfile;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,9 @@ public class SignUpServlet extends HttpServlet {
 
   public void doPost(HttpServletRequest request,
                      HttpServletResponse response){
-
+    String login = request.getParameter("login");
+    String pass = request.getParameter("password");
+    UserProfile profile = new UserProfile(login, pass);
+    accountService.addUser(profile);
   }
 }
